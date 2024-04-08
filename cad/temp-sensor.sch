@@ -1089,7 +1089,8 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <wire x1="27.94" y1="259.08" x2="68.58" y2="259.08" width="0.1524" layer="91"/>
 <pinref part="IC2" gate="G$1" pin="E1"/>
 <wire x1="68.58" y1="259.08" x2="78.74" y2="259.08" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="259.08" x2="119.38" y2="259.08" width="0.1524" layer="91"/>
+<wire x1="78.74" y1="259.08" x2="101.6" y2="259.08" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="259.08" x2="119.38" y2="259.08" width="0.1524" layer="91"/>
 <wire x1="127" y1="226.06" x2="119.38" y2="226.06" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="226.06" x2="119.38" y2="259.08" width="0.1524" layer="91"/>
 <wire x1="119.38" y1="259.08" x2="162.56" y2="259.08" width="0.1524" layer="91"/>
@@ -1111,16 +1112,19 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <pinref part="IC1" gate="G$1" pin="E3"/>
 <wire x1="33.02" y1="220.98" x2="10.16" y2="220.98" width="0.1524" layer="91"/>
 <wire x1="10.16" y1="220.98" x2="10.16" y2="259.08" width="0.1524" layer="91"/>
-<wire x1="10.16" y1="259.08" x2="27.94" y2="259.08" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="259.08" x2="17.78" y2="259.08" width="0.1524" layer="91"/>
 <junction x="27.94" y="259.08"/>
 <junction x="10.16" y="259.08"/>
 <pinref part="IC1" gate="G$1" pin="E4"/>
+<wire x1="17.78" y1="259.08" x2="27.94" y2="259.08" width="0.1524" layer="91"/>
 <wire x1="60.96" y1="220.98" x2="78.74" y2="220.98" width="0.1524" layer="91"/>
 <wire x1="78.74" y1="220.98" x2="78.74" y2="259.08" width="0.1524" layer="91"/>
 <junction x="78.74" y="259.08"/>
 <junction x="162.56" y="259.08"/>
-<wire x1="162.56" y1="259.08" x2="218.44" y2="259.08" width="0.1524" layer="91"/>
+<wire x1="162.56" y1="259.08" x2="165.1" y2="259.08" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="VCC"/>
+<wire x1="165.1" y1="259.08" x2="208.28" y2="259.08" width="0.1524" layer="91"/>
+<wire x1="210.82" y1="259.08" x2="218.44" y2="259.08" width="0.1524" layer="91"/>
 <wire x1="218.44" y1="259.08" x2="231.14" y2="259.08" width="0.1524" layer="91"/>
 <wire x1="152.4" y1="48.26" x2="231.14" y2="48.26" width="0.1524" layer="91"/>
 <wire x1="231.14" y1="48.26" x2="231.14" y2="259.08" width="0.1524" layer="91"/>
@@ -1129,6 +1133,24 @@ Source: &lt;a href=""&gt; Datasheet &lt;/a&gt;</description>
 <wire x1="218.44" y1="109.22" x2="218.44" y2="259.08" width="0.1524" layer="91"/>
 <junction x="218.44" y="259.08"/>
 <junction x="231.14" y="259.08"/>
+<pinref part="OPAMP1" gate="A" pin="VDD"/>
+<wire x1="38.1" y1="200.66" x2="17.78" y2="200.66" width="0.1524" layer="91"/>
+<wire x1="17.78" y1="200.66" x2="17.78" y2="259.08" width="0.1524" layer="91"/>
+<junction x="17.78" y="259.08"/>
+<pinref part="OPAMP2" gate="A" pin="VDD"/>
+<wire x1="93.98" y1="177.8" x2="101.6" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="177.8" x2="101.6" y2="259.08" width="0.1524" layer="91"/>
+<junction x="101.6" y="259.08"/>
+<pinref part="OPAMP3" gate="A" pin="VDD"/>
+<wire x1="149.86" y1="205.74" x2="165.1" y2="205.74" width="0.1524" layer="91"/>
+<wire x1="165.1" y1="205.74" x2="165.1" y2="259.08" width="0.1524" layer="91"/>
+<junction x="165.1" y="259.08"/>
+<pinref part="OPAMP4" gate="A" pin="VDD"/>
+<wire x1="190.5" y1="182.88" x2="190.5" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="177.8" x2="208.28" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="177.8" x2="208.28" y2="259.08" width="0.1524" layer="91"/>
+<wire x1="208.28" y1="259.08" x2="210.82" y2="259.08" width="0.1524" layer="91"/>
+<junction x="208.28" y="259.08"/>
 </segment>
 </net>
 <net name="N$24" class="0">
