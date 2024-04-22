@@ -7530,7 +7530,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <text x="208.28" y="241.3" size="1.778" layer="91">PTAT circuit</text>
 <text x="40.64" y="132.08" size="1.778" layer="91">V_BG Buffer</text>
 <text x="208.28" y="132.08" size="1.778" layer="91">V_PTAT Buffer</text>
-<text x="203.2" y="40.64" size="1.778" layer="91">U2 is in astable mode</text>
+<text x="205.74" y="43.18" size="1.778" layer="91">U2 is in astable mode</text>
 <text x="259.08" y="83.82" size="1.778" layer="91">DO NOT POPULATE R6</text>
 <text x="175.26" y="68.58" size="1.778" layer="91">May not need to populate C13, C14</text>
 <text x="5.08" y="68.58" size="1.778" layer="91">May not need to populate C11, C12</text>
