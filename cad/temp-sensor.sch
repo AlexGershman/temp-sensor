@@ -9917,8 +9917,6 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <text x="208.28" y="132.08" size="1.778" layer="91">V_PTAT Buffer</text>
 <text x="203.2" y="40.64" size="1.778" layer="91">U2 is in astable mode</text>
 <text x="259.08" y="83.82" size="1.778" layer="91">DO NOT POPULATE R6</text>
-<text x="175.26" y="68.58" size="1.778" layer="91">May not need to populate C13, C14</text>
-<text x="5.08" y="68.58" size="1.778" layer="91">May not need to populate C11, C12</text>
 <text x="-129.54" y="238.76" size="1.778" layer="91">LDO Voltage Regulator</text>
 <text x="-165.1" y="226.06" size="1.778" layer="91">Battery connection</text>
 <text x="-88.9" y="190.5" size="1.778" layer="91">LABEL: PWR_ON</text>
