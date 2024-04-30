@@ -12173,6 +12173,7 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <label x="5.08" y="119.38" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="U1" gate="G$1" pin="THRES"/>
 <wire x1="15.24" y1="119.38" x2="5.08" y2="119.38" width="0.1524" layer="91"/>
+<junction x="15.24" y="119.38"/>
 </segment>
 <segment>
 <wire x1="81.28" y1="109.22" x2="91.44" y2="109.22" width="0.1524" layer="91"/>
@@ -12611,12 +12612,10 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </sheet>
 </sheets>
 <errors>
-<approved hash="104,1,66.04,27.94,U1,VCC,+5V,,,"/>
-<approved hash="104,1,236.22,27.94,U2,VCC,+5V,,,"/>
+<approved hash="104,1,81.28,121.92,U1,VCC,+5V,,,"/>
+<approved hash="104,1,81.28,35.56,U2,VCC,+5V,,,"/>
 <approved hash="104,1,66.04,177.8,U4,VDD,+5V,,,"/>
 <approved hash="104,1,66.04,162.56,U4,VSS,GND,,,"/>
-<approved hash="104,1,66.04,119.38,U5,VDD,+5V,,,"/>
-<approved hash="104,1,66.04,104.14,U5,VSS,GND,,,"/>
 <approved hash="104,1,236.22,119.38,U7,VDD,+5V,,,"/>
 <approved hash="104,1,236.22,104.14,U7,VSS,GND,,,"/>
 <approved hash="104,1,327.66,193.04,U6,VDD,+5V,,,"/>
@@ -12625,9 +12624,8 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <approved hash="104,1,-172.72,231.14,BT1,+,+9V,,,"/>
 <approved hash="208,1,-22.86,261.62,+5V,sup,,,,"/>
 <approved hash="208,1,238.76,139.7,+5V,sup,,,,"/>
-<approved hash="208,1,68.58,48.26,+5V,sup,,,,"/>
-<approved hash="208,1,238.76,48.26,+5V,sup,,,,"/>
-<approved hash="208,1,68.58,139.7,+5V,sup,,,,"/>
+<approved hash="208,1,83.82,142.24,+5V,sup,,,,"/>
+<approved hash="208,1,83.82,55.88,+5V,sup,,,,"/>
 <approved hash="208,1,68.58,198.12,+5V,sup,,,,"/>
 <approved hash="208,1,330.2,213.36,+5V,sup,,,,"/>
 <approved hash="208,1,-104.14,218.44,+5V,out,,,,"/>
@@ -12638,15 +12636,18 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <approved hash="208,1,269.24,241.3,+5V,sup,,,,"/>
 <approved hash="208,1,274.32,241.3,+5V,sup,,,,"/>
 <approved hash="208,1,-208.28,144.78,+5V,sup,,,,"/>
-<approved hash="208,1,-71.12,78.74,+5V,sup,,,,"/>
+<approved hash="208,1,-60.96,78.74,+5V,sup,,,,"/>
 <approved hash="208,1,-195.58,144.78,+5V,sup,,,,"/>
 <approved hash="208,1,86.36,251.46,+5V,sup,,,,"/>
 <approved hash="208,1,96.52,251.46,+5V,sup,,,,"/>
 <approved hash="208,1,-91.44,165.1,+5V,sup,,,,"/>
 <approved hash="208,1,-114.3,165.1,+5V,sup,,,,"/>
 <approved hash="208,1,-66.04,111.76,+5V,sup,,,,"/>
+<approved hash="208,1,-38.1,134.62,+5V,sup,,,,"/>
+<approved hash="208,1,12.7,66.04,+5V,sup,,,,"/>
 <approved hash="113,1,-171.287,226.06,BT1,,,,,"/>
-<approved hash="113,1,-65.3627,58.2574,J1,,,,,"/>
+<approved hash="113,1,-55.2027,58.2574,J1,,,,,"/>
+<approved hash="113,1,-32.3427,124.297,J2,,,,,"/>
 </errors>
 </schematic>
 </drawing>
