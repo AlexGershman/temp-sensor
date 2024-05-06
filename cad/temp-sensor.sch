@@ -11200,6 +11200,12 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="R22" library="SparkFun-Resistors" library_urn="urn:adsk.eagle:library:532" deviceset="10KOHM" device="-0603-1/10W-1%" package3d_urn="urn:adsk.eagle:package:41389018/1" value="10k"/>
 <part name="GND49" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
+<part name="TP3" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="PAD1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13">
+<attribute name="TP_SIGNAL_NAME" value="FREQ"/>
+</part>
+<part name="TP5" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="PAD1-13" package3d_urn="urn:adsk.eagle:package:27946/1" value="TPPAD1-13">
+<attribute name="TP_SIGNAL_NAME" value="PULSE"/>
+</part>
 </parts>
 <sheets>
 <sheet>
@@ -11647,6 +11653,14 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </instance>
 <instance part="P+3" gate="1" x="12.7" y="68.58" smashed="yes">
 <attribute name="VALUE" x="10.16" y="71.12" size="1.778" layer="96"/>
+</instance>
+<instance part="TP3" gate="G$1" x="111.76" y="15.24" smashed="yes" rot="R180">
+<attribute name="NAME" x="113.03" y="13.97" size="1.778" layer="95" rot="R180"/>
+<attribute name="TP_SIGNAL_NAME" x="115.57" y="16.51" size="1.778" layer="97"/>
+</instance>
+<instance part="TP5" gate="G$1" x="109.22" y="104.14" smashed="yes" rot="R180">
+<attribute name="NAME" x="110.49" y="102.87" size="1.778" layer="95" rot="R180"/>
+<attribute name="TP_SIGNAL_NAME" x="113.03" y="105.41" size="1.778" layer="97"/>
 </instance>
 </instances>
 <busses>
@@ -12367,9 +12381,12 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </net>
 <net name="PULSE_OUT" class="0">
 <segment>
-<wire x1="81.28" y1="111.76" x2="116.84" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="111.76" x2="109.22" y2="111.76" width="0.1524" layer="91"/>
 <label x="116.84" y="111.76" size="1.778" layer="95" xref="yes"/>
 <pinref part="U1" gate="G$1" pin="OUT"/>
+<pinref part="TP5" gate="G$1" pin="TP"/>
+<wire x1="109.22" y1="111.76" x2="116.84" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="109.22" y1="106.68" x2="109.22" y2="111.76" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U9" gate="U1" pin="PD2(INT0)"/>
@@ -12379,9 +12396,12 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 </net>
 <net name="FREQ_OUT" class="0">
 <segment>
-<wire x1="81.28" y1="25.4" x2="116.84" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="81.28" y1="25.4" x2="111.76" y2="25.4" width="0.1524" layer="91"/>
 <label x="116.84" y="25.4" size="1.778" layer="95" xref="yes"/>
 <pinref part="U2" gate="G$1" pin="OUT"/>
+<pinref part="TP3" gate="G$1" pin="TP"/>
+<wire x1="111.76" y1="25.4" x2="116.84" y2="25.4" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="17.78" x2="111.76" y2="25.4" width="0.1524" layer="91"/>
 </segment>
 <segment>
 <pinref part="U9" gate="U1" pin="PD5(T1)"/>
