@@ -1,8 +1,10 @@
 #include <Arduino.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/sleep.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <stdio.h> 
 
 #define PULSE_INPUT_PIN PD5  // T1 pin (freq out astable output)
 #define STOP_COUNT_PIN PD2   // INT0 pin (pulse out, stop on this falling edge)
@@ -13,10 +15,12 @@
 #define SCREEN_HEIGHT 32 // OLED display height, in pixels
 #define OLED_RESET -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 
+#define CHAR_DISPLAYED 3 // Number of characters to display on OLED
+
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET); // Declaring the OLED name
 
-const float pulsesToTempFactor = 3.417;
-const float pulsesToTempOffset = -278.77;
+const float pulsesToTempFactor = 0.3363;
+const float pulsesToTempOffset = -273;
 
 volatile uint32_t pulseCount = 0; // use uint16_t depending on how many pulses
 volatile bool countingEnabled = true;
@@ -26,7 +30,7 @@ volatile uint32_t pulseCountInInterval = 0; // Pulse count within the interval
 uint32_t totalPulseCount = 0; // Total pulse count over multiple triggers
 uint8_t triggerCount = 0; // Number of triggers
 
-const float numTriggersForAverage = 20; // Number of triggers to average over
+const float numTriggersForAverage = 5; // Number of triggers to average over
 
 void setup() {
   // Initialize serial communication for debugging
@@ -65,8 +69,9 @@ void setup() {
   EICRA |= (1 << ISC01);  // Trigger on falling edge (ISC01 = 1, ISC00 = 0)
   EIMSK |= (1 << INT0);   // Enable INT0 interrupt
 
-  // Enable global interrupts
-  sei();
+  // Sleep until interupted by button
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+  sei(); // Enable global interrupts
 }
 
 void loop() {
@@ -75,80 +80,62 @@ void loop() {
     display.setTextSize(2);
     display.setTextColor(WHITE);
     display.setCursor(0, 0);
-    display.println("Count Stopped");
+    display.println("Sleeping");
     display.display();
-    delay(1000);
+    delay(2000);
+    display.ssd1306_command(0xAE); //Disable display
+    cli();
+    sleep_enable();
+    sei(); // Enable global interrupts
+    sleep_cpu();
+    sleep_disable();
     return;
   }
 
-  // Trigger the pulse signal
-  PORTC |= (1 << TRIGGER_PIN); // Set PC0 high
-  delay(50); // Wait for 50ms
-  PORTD &= ~(1 << PULSE_TRIGGER_PIN); // Set PD7 low (pulse trigger)
-  TCNT1 = 0;
-  PORTD |= (1 << PULSE_TRIGGER_PIN);  // Set PD7 high again to finish the pulse
+  PORTC |= (1 << TRIGGER_PIN); // Enable the 555 timers
+  delay(100); // Wait for 50ms
+  PORTD &= ~(1 << PULSE_TRIGGER_PIN); // Set PD7 low (pulse trigger), trigger the pulse
+  TCNT1 = 0;  // Reset microcontroller counter
+  PORTD |= (1 << PULSE_TRIGGER_PIN);  // Set PD7 high again to finish the pulse, untrigger the pulse
 
-  // display.clearDisplay();
-  // display.setTextSize(2);
-  // display.setTextColor(WHITE);
-  // display.setCursor(0, 0);
-  // display.println("Test Trig");
-  // //display.setCursor(0, 16);
-  // //display.println(TCNT1);
-  // display.display();
-  // delay(1000);
-  // Calculate average pulse count over multiple triggers
   if (triggerCount >= numTriggersForAverage) {
     float averagePulseCount = totalPulseCount / numTriggersForAverage;
-    float temperature = convertPulsesToTemp(averagePulseCount);
+    float temperatureC = convertPulsesToTemp(averagePulseCount);
+    float temperatureF = (temperatureC * 9.0/5.0) + 32.0;
+    //char temp_str[CHAR_DISPLAYED]; 
+    //snprintf(temp_str, CHAR_DISPLAYED, "%.2", temperature); // Convert temp float to string stored in temp_str
 
     display.clearDisplay();
     display.setTextSize(2);
     display.setTextColor(WHITE);
     display.setCursor(0, 0);
-    display.println("APC: "); //average pulse counter output
-    display.setCursor(60, 0);
-    display.println(averagePulseCount);
-    // display.setCursor(0, 16);
-    // display.println("T: ");
-    // display.setCursor(80, 16);
-    // display.println(temperature);
+    display.print(temperatureC);
+    display.println(" degC");
+    display.setCursor(0, 16);
+    display.print(temperatureF);
+    display.println(" degF");
     display.display();
-    delay(100000);
-
-    // // Debug output
-    // Serial.print("Average Pulse Count: ");
-    // Serial.print(averagePulseCount);
-    // Serial.print(" | Temperature: ");
-    // Serial.print(temperature);
-    // Serial.println("°C");
+    // Display for 10 seconds
+    delay(10000);
 
     // Reset counters for next averaging period
     totalPulseCount = 0;
     triggerCount = 0;
+
+    // Enable sleep mode
+    //SMCR |= (1 << SE);
+    // Sleep until interupted by button
+    //sleep_cpu();
   }
-  // display.clearDisplay();
-  // display.setTextSize(2);
-  // display.setTextColor(WHITE);
-  // display.setCursor(0, 0);
-  // display.println("Trig < 5");
-  // //display.setCursor(70, 0);
-  // //display.println(TCNT1);
-  // display.setCursor(0, 16);
-  // display.println("Trig C: ");
-  // display.setCursor(70, 16);
-  // display.println(triggerCount);
-  // display.display();
-  // //delay(1000);
 }
 
 // Interrupt Service Routine (ISR) for INT0 external interrupt
 ISR(INT0_vect) {
-  countingEnabled = false; //stop counting
-  pulseCount = TCNT1;
-  totalPulseCount += pulseCount; //add all the current pulses to the total counter for averaging
-  triggerCount++; //to keep track of the number of triggers
-  pulseCount = 0; //reset pulse count to 0 for the next iteration
+  pulseCount = TCNT1; // Read pulse count register
+  countingEnabled = false; // Stop counting
+  totalPulseCount += pulseCount; //Add all the current pulses to the total counter for averaging
+  triggerCount++; //To keep track of the number of triggers
+  pulseCount = 0; //Reset pulse count to 0 for the next iteration
 
   if (triggerCount < numTriggersForAverage) {
     countingEnabled = true;
@@ -157,8 +144,9 @@ ISR(INT0_vect) {
 
 // Interrupt Service Routine (ISR) for PCINT9 external interrupt
 ISR(PCINT0_vect) {
+  //SMCR &= (0 << SE);
   triggerCount = 0;
-  countingEnabled = true;
+  countingEnabled = true; 
 }
 
 float convertPulsesToTemp(unsigned int pulses) {
